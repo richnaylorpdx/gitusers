@@ -1,8 +1,5 @@
 import { connect } from 'react-redux'
-// import * as actions from 'actions/feature.js'
-import * as actions from '../../modules/lists'
-// import * as featureSelector from 'selectors/feature.js'
-// import FeatureSchematic from 'pages/content/FeatureSchematic.jsx'
+import * as actions from '../../modules/users'
 import Home from '../../views/home/Home'
 
 // const mapStateToProps = (state, ownProps) => {
