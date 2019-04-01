@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 import About from '../about'
-import home2 from '../home/home2.js'
 import Home from '../../views/home/Home'
 import HomeContainer from '../home/HomeContainer'
 
