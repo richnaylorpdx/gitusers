@@ -25,7 +25,6 @@
     "react-router-dom": "4.3.1",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
-    "reselect": "^4.0.0",
     "sanitize.css": "7.0.3",
     "serve": "10.1.2"
   },
