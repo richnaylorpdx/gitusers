@@ -26,3 +26,6 @@ NOTES:
     - for the 'public repos' & 'public_gists' section, made the assumption that this should just be the count
             *** this is obviously a point where Id seek calrification from UX, product owner, or the person that defines the 'acceptance criteria'
     - Assuming that all required fields in UX will be present in a '200' return because git requires them for registration and returns appropriate vals for each. 
+    - TODO: border for 'git-user-table-header'
+    - TODO: Turn user results into component
+    - Im unsure what the border inside and around the first item in the results list. Id need to find out what this is or is supposed to do. Leaving this out of initial work
