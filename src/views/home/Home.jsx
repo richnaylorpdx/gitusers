@@ -27,21 +27,49 @@ export default class Home extends React.Component {
                     onKeyPress={(e) => e.key === 'Enter' && addUser(this.state.currentValue)}
                     className='search-box'
                 />
-                <div>
+                    
+                <table className='git-users'>
+                    <tr class='git-user-table-header'> 
+                        <th>Username</th> 
+                        <th>Name</th> 
+                        <th>Public Repos</th> 
+                        <th>Public Gists</th>
+                        <th>Followers</th>
+                        <th>Following</th>
+                        <th>Date Created</th>
+                    </tr> 
+                    <tr>
+                        <td>cruzies dad</td>
+                        <td>cruz dad</td>
+                        <td>10</td>
+                        <td>20</td>
+                        <td>30</td>
+                        <td>40</td>
+                        <td>04/02/2019</td>
+                    </tr>
+                    <tr>
+                        <td>cruzies dad</td>
+                        <td>cruz dad</td>
+                        <td>10</td>
+                        <td>20</td>
+                        <td>30</td>
+                        <td>40</td>
+                        <td>04/02/2019</td>
+                    </tr>
                     {
                         userData && userData.map(user => 
-                            <ul key={user.id}>
-                                <li><a href={user.url}>{user.login} | </a></li>
-                                <li>{user.name} | </li>
-                                <li>{user.public_repos} | </li>
-                                <li>{user.public_gists} | </li>
-                                <li>{user.followers} | </li>
-                                <li>{convertDate(user.created_at)}</li>
-                            </ul>
-
-                        )
+                            <tr>
+                                <td><a href={user.url}>{user.login}</a></td>
+                                <td>{user.name}</td>
+                                <td>{user.public_repos}</td>
+                                <td>{user.public_gists}</td>
+                                <td>{user.followers}</td>
+                                <td>{user.following}</td>
+                                <td>{convertDate(user.created_at)}</td>
+                            </tr>
+                        )                    
                     }
-                </div>
+                </table>
             </React.Fragment>
         )
     }
