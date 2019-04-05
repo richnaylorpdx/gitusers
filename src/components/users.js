@@ -1,22 +1,26 @@
 import { gitusersRef } from '../config/firebase'
 
-export const UPDATE_GIT_USERS = 'UPDATE_GIT_USERS'
 export const FETCH_USERS = 'FETCH_USERS'
-export const NO_USER_FOUND = 'NO_USER_FOUND'
+export const USER_ERROR = 'USER_ERROR'
 
 const initialState = {
-    gitUsers: [],
+    fetchUsers: ''
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_GIT_USERS:
+        case FETCH_USERS:
             return {
                 ...state,
-                gitUsers: [...state.gitUsers, action.user]
+                fetchUsers: action.user,
+                success: true,
+                latestUser: action.latestUser
             }
-        case FETCH_USERS:
-            return action.payload
+        case USER_ERROR:
+            return {
+                ...state,
+                success: false
+            }
         default:
             return state
     }
@@ -28,24 +32,38 @@ export const addUser = (val) => async dispatch => {
         .then(response => 
             response.json()
         )
-        .then(gitusersRef.push().set(val))
         .then(json => {
-            console.log(JSON.stringify(json))
-            dispatch({
-                type: UPDATE_GIT_USERS,
-                user: json
-            })
+            gitusersRef.push().set(json)
         })
+        .then(() => gitusersRef.once("value", users => {
+            let userResults = []
+            users.forEach(user => {
+                userResults.push(user.val())
+            })
+            dispatch({
+                type: FETCH_USERS,
+                user: userResults,
+                latestUser: val,
+            })
+        }))
         .catch(err =>
-            console.log('error')
+            dispatch({
+                type: FETCH_USERS,
+                latestUser: val,
+            })
         )
 } 
 
-export const fetchUsers = () => async dispatch => {
-    gitusersRef.on("value", snapshot => {
-      dispatch({
-        type: FETCH_USERS,
-        payload: snapshot.val()
-      })
+export const getUsers = () => async dispatch => {
+    gitusersRef.once("value", users => {
+        let userResults = []
+        users.forEach(user => {
+            userResults.push(user.val())
+        })
+        dispatch({
+            type: FETCH_USERS,
+            user: userResults,
+            latestUser: null,
+        })
     })
-  };
+}
