@@ -2,6 +2,7 @@ import { gitusersRef } from '../config/firebase'
 
 export const UPDATE_GIT_USERS = 'UPDATE_GIT_USERS'
 export const FETCH_USERS = 'FETCH_USERS'
+export const NO_USER_FOUND = 'NO_USER_FOUND'
 
 const initialState = {
     gitUsers: [],
@@ -24,7 +25,9 @@ export default (state = initialState, action) => {
 export const addUser = (val) => async dispatch => {
     const url = `https://api.github.com/users/${val}`
     return fetch(url)
-        .then(response => response.json())
+        .then(response => 
+            response.json()
+        )
         .then(gitusersRef.push().set(val))
         .then(json => {
             console.log(JSON.stringify(json))
@@ -33,6 +36,9 @@ export const addUser = (val) => async dispatch => {
                 user: json
             })
         })
+        .catch(err =>
+            console.log('error')
+        )
 } 
 
 export const fetchUsers = () => async dispatch => {
