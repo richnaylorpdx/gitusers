@@ -20,10 +20,12 @@ yarn start
 This boilerplate is built using [create-react-app](https://github.com/facebook/create-react-app) so you will want to read the User Guide for more goodies.
 # gitusers
 
-NOTES:
+## NOTES:
+```bash
 since the app is tiny, im using a single file for actions, reducers, constants
         ~/src/components/users.js
 for the 'public repos' & 'public_gists' section, made the assumption that this should just be the count
+'''
 
             *** this is obviously a point where Id seek calrification from UX, product owner, or the person that defines the 'acceptance criteria'
 
