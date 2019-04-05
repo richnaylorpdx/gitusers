@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from "prop-types"
 import { Input } from 'antd'
-import users from '../../modules/users';
+import users from '../../components/users';
 import './Home.css'
 
 export default class Home extends React.Component {
     static propTypes = {
-        addUser: PropTypes.func,
         userData: PropTypes.array,
+        addUser: PropTypes.func,
         convertDate: PropTypes.func,
+        userValid: PropTypes.func
     }
 
     constructor() {
@@ -19,7 +20,7 @@ export default class Home extends React.Component {
     }
 
      render() {
-        const { addUser, userData, convertDate } = this.props
+        const { addUser, userData, convertDate, userValid } = this.props
         return (
             <React.Fragment>
                 <Input 
@@ -27,9 +28,9 @@ export default class Home extends React.Component {
                     onKeyPress={(e) => e.key === 'Enter' && addUser(this.state.currentValue)}
                     className='search-box'
                 />
-                    
+{userData && userValid(userData)}
                 <table className='git-users'>
-                    <tr class='git-user-table-header'> 
+                    <tr className='git-user-table-header'> 
                         <th>Username</th> 
                         <th>Name</th> 
                         <th>Public Repos</th> 
