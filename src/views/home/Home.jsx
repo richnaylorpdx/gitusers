@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import { Input } from 'antd'
+import { Input, Button } from 'antd'
 import users from '../../components/users';
 import './Home.css'
 
 export default class Home extends React.Component {
     static propTypes = {
-        userData: PropTypes.array,
+        userInfo: PropTypes.array,
         addUser: PropTypes.func,
         convertDate: PropTypes.func,
-        userValid: PropTypes.func
+        getUsers: PropTypes.func,
+        success: PropTypes.bool,
+        latestUser: PropTypes.string
     }
 
     constructor() {
@@ -19,8 +21,12 @@ export default class Home extends React.Component {
         }
     }
 
-     render() {
-        const { addUser, userData, convertDate, userValid } = this.props
+    componentWillMount() {
+        this.props.getUsers()
+    }
+
+    render() {
+        const { success, addUser, convertDate, userInfo, latestUser } = this.props
         return (
             <React.Fragment>
                 <Input 
@@ -28,7 +34,12 @@ export default class Home extends React.Component {
                     onKeyPress={(e) => e.key === 'Enter' && addUser(this.state.currentValue)}
                     className='search-box'
                 />
-{userData && userValid(userData)}
+                {
+                    (success && latestUser !== null) && <h6>Success: user "{latestUser}" added to the db</h6> 
+                }
+                {
+                    (!success && latestUser !== null) && <h6>Error adding "{latestUser}" to the db.</h6>
+                }
                 <table className='git-users'>
                     <tr className='git-user-table-header'> 
                         <th>Username</th> 
@@ -58,7 +69,7 @@ export default class Home extends React.Component {
                         <td>04/02/2019</td>
                     </tr>
                     {
-                        userData && userData.map(user => 
+                        userInfo && userInfo.map(user => 
                             <tr>
                                 <td><a href={user.url}>{user.login}</a></td>
                                 <td>{user.name}</td>
@@ -68,7 +79,7 @@ export default class Home extends React.Component {
                                 <td>{user.following}</td>
                                 <td>{convertDate(user.created_at)}</td>
                             </tr>
-                        )                    
+                        )                 
                     }
                 </table>
             </React.Fragment>
