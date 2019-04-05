@@ -4,7 +4,9 @@ import Home from '../../views/home/Home'
 
 const mapStateToProps = (state) => {
     return {
-        userData: state.users.gitUsers,
+        userInfo: state.users.fetchUsers,
+        success: state.users.success,
+        latestUser: state.users.latestUser
     }
 }
 
@@ -17,9 +19,9 @@ const mapDispatchToProps = (dispatch) => {
             const date = new Date(val)
             return((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
         },
-        userValid: (val) => {
-            console.log('user valid: ', val)
-        }
+        getUsers: () => {
+            dispatch(actions.getUsers())
+        },
     }
 }
 
