@@ -29,3 +29,5 @@ NOTES:
     - TODO: border for 'git-user-table-header'
     - TODO: Turn user results into component
     - Im unsure what the border inside and around the first item in the results list. Id need to find out what this is or is supposed to do. Leaving this out of initial work
+    - Font for error/success needs to be updated
+    - Error checking is ambiguous, could use more clarification and def more work
