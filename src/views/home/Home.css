@@ -1,30 +1,7 @@
 .search-box {
     width: 100%;
-    background-color: #BDDEA7;
-    border: .5px rgb(25, 151, 25) solid;
-}
-
-.user-result {
-    white-space: nowrap;
-    background-color: grey;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #cccccc;
-    display: flex;
-    flex-direction: row;
-  }
-  
-li {
-    width: 150px;
-}
-
-li a:hover {
-    background-color: #111111;
+    /* background-color: #BDDEA7;
+    border: .5px rgb(25, 151, 25) solid; */
 }
 
 table {
@@ -33,24 +10,11 @@ table {
     width: 100%;
 }
 
-th {
-    background-color: #FFE594;
+th, td {
+    text-align: left;
+    padding: 8px;
 }
-
-td {
-    margin-top: 5px;
-    border-right: 1px solid #000000 ;
-    border-image: linear-gradient(to bottom, rgba(0,0,0,0) 25%,rgba(0,0,0,1) 25%,rgba(0,0,0,1) 75%,rgba(0,0,0,0) 75%);
-    border-image-slice: 1;
-    text-align: center;
-    background-color: #cccccc;
+  
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
-
-tr > td:last-of-type {
-    border: none;
-}
-
-.git-users { 
-    border-collapse:separate; 
-    border-spacing:0 2px; 
-} 

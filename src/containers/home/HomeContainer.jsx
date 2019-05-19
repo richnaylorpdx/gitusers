@@ -1,27 +1,21 @@
 import { connect } from 'react-redux'
-import * as actions from '../../components/users'
+import * as listActions from '../../components/lists'
 import Home from '../../views/home/Home'
 
 const mapStateToProps = (state) => {
     return {
-        userInfo: state.users.fetchUsers,
-        success: state.users.success,
-        latestUser: state.users.latestUser
+        listData: state.lists.lists,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addUser: (val) => {
-            dispatch(actions.addUser(val))
+        addList: (val) => {
+            dispatch(listActions.addList(val))
         },
-        convertDate: (val) => {
-            const date = new Date(val)
-            return((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
-        },
-        getUsers: () => {
-            dispatch(actions.getUsers())
-        },
+        getListItems: () => {
+            dispatch(listActions.getListItems())
+        }
     }
 }
 

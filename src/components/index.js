@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import users from './users'
+import lists from './lists'
 
 export default combineReducers({
-  users
+  lists
 })

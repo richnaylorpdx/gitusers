@@ -1,17 +1,14 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import { Input, Button } from 'antd'
-import users from '../../components/users';
+import { Input, Table, Divider, Tag } from 'antd'
+import { addList, getListItems } from '../../components/lists'
 import './Home.css'
 
 export default class Home extends React.Component {
     static propTypes = {
-        userInfo: PropTypes.array,
-        addUser: PropTypes.func,
-        convertDate: PropTypes.func,
-        getUsers: PropTypes.func,
-        success: PropTypes.bool,
-        latestUser: PropTypes.string
+        addList: PropTypes.func,
+        getListItems: PropTypes.func,
+        listData: PropTypes.array
     }
 
     constructor() {
@@ -22,66 +19,68 @@ export default class Home extends React.Component {
     }
 
     componentWillMount() {
-        this.props.getUsers()
+        this.props.getListItems()
+        console.log('list data: ', this.props.listData)
+    }
+
+    updateList = () => {
+        this.props.addList(this.state.currentValue)
+        this.setState({currentValue: ''})
     }
 
     render() {
-        const { success, addUser, convertDate, userInfo, latestUser } = this.props
+        const { listData } = this.props
+
+        const data = [{
+            key: '1',
+            name: 'Mike',
+            address: '10 Downing Street',
+            age: 32          
+        }, {
+            key: '2',
+            name: 'John',
+            address: '10 Downing Street',
+            age: 42
+          }];
+          
+          const columns = [{
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+          }, {
+            title: 'Age',
+            dataIndex: 'age',
+            key: 'age',
+          }, {
+            title: 'Address',
+            dataIndex: 'address',
+            key: 'address',
+          }];
         return (
             <React.Fragment>
-                <Input 
+                <Input.Search
                     onChange={(e) => this.setState({currentValue: e.target.value})}
-                    onKeyPress={(e) => e.key === 'Enter' && addUser(this.state.currentValue)}
-                    className='search-box'
+                    onKeyPress={(e) => e.key === 'Enter' && this.updateList(this.state.currentValue)}
+                    enterButton='+'
+                    // onSearch={() => this.updateList(this.state.currentValue)}
+                    placeholder='Enter list item'
+                    value={this.state.currentValue}
+                    size='large'
                 />
-                {
-                    (success && latestUser !== null) && <h6>Success: user "{latestUser}" added to the db</h6> 
-                }
-                {
-                    (!success && latestUser !== null) && <h6>Error adding "{latestUser}" to the db.</h6>
-                }
-                <table className='git-users'>
-                    <tr className='git-user-table-header'> 
-                        <th>Username</th> 
-                        <th>Name</th> 
-                        <th>Public Repos</th> 
-                        <th>Public Gists</th>
-                        <th>Followers</th>
-                        <th>Following</th>
-                        <th>Date Created</th>
-                    </tr> 
+                <table>
                     <tr>
-                        <td>cruzies dad</td>
-                        <td>cruz dad</td>
-                        <td>10</td>
-                        <td>20</td>
-                        <td>30</td>
-                        <td>40</td>
-                        <td>04/02/2019</td>
+                        <th>Your List</th>
                     </tr>
-                    <tr>
-                        <td>cruzies dad</td>
-                        <td>cruz dad</td>
-                        <td>10</td>
-                        <td>20</td>
-                        <td>30</td>
-                        <td>40</td>
-                        <td>04/02/2019</td>
-                    </tr>
-                    {
-                        userInfo && userInfo.map(user => 
-                            <tr>
-                                <td><a href={user.url}>{user.login}</a></td>
-                                <td>{user.name}</td>
-                                <td>{user.public_repos}</td>
-                                <td>{user.public_gists}</td>
-                                <td>{user.followers}</td>
-                                <td>{user.following}</td>
-                                <td>{convertDate(user.created_at)}</td>
-                            </tr>
-                        )                 
-                    }
+                        {
+                            listData && listData.map(list =>
+                                    <tr>
+                                        <td>{list.listname}</td>
+                                        <td>{list.id}</td>
+                                    </tr>
+                            )
+                        }
                 </table>
+                {/* <Table columns={columns} dataSource={data} /> */}
             </React.Fragment>
         )
     }
