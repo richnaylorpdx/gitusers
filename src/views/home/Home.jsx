@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types"
 import { Input } from 'antd'
+import GitUserTable from '../../components/GitUserTable/GitUserTable'
 import './Home.css'
 
 export default class Home extends React.Component {
@@ -31,8 +32,10 @@ export default class Home extends React.Component {
 
   render() {
     const { success, convertDate, userInfo, latestUser } = this.props
+    const tableHeaders = ['Username', 'Name', 'Public Repos', 'Public Gists', 'Followers', 'Following', 'Date Created']
+
     return (
-      <React.Fragment>
+      <div className='page-wrapper'>
         <Input
           onChange={(e) => this.setState({ currentValue: e.target.value })}
           onKeyPress={(e) => e.key === 'Enter' && this.userUpdate(this.state.currentValue)}
@@ -45,31 +48,12 @@ export default class Home extends React.Component {
         {
           (!success && latestUser !== null) && <h6>Error adding "{latestUser}" to the db.</h6>
         }
-        <table className='git-users'>
-          <tr className='git-user-table-header'>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Public Repos</th>
-            <th>Public Gists</th>
-            <th>Followers</th>
-            <th>Following</th>
-            <th>Date Created</th>
-          </tr>
-          {
-            userInfo && userInfo.map(user =>
-              <tr>
-                <td><a href={user.url}>{user.login}</a></td>
-                <td>{user.name}</td>
-                <td>{user.public_repos}</td>
-                <td>{user.public_gists}</td>
-                <td>{user.followers}</td>
-                <td>{user.following}</td>
-                <td>{convertDate(user.created_at)}</td>
-              </tr>
-            )
-          }
-        </table>
-      </React.Fragment>
+        <GitUserTable 
+          tableHeaders={tableHeaders}
+          userInfo={userInfo}
+          convertDate={convertDate}
+        />
+      </div>
     )
   }
 }
