@@ -25,6 +25,11 @@ export default class Home extends React.Component {
     this.props.getUsers()
   }
 
+  userUpdate = (val) => {
+    this.props.addUser(val)
+    this.setState({ currentValue: null })
+  }
+
   render() {
     const { success, addUser, convertDate, userInfo, latestUser } = this.props
 
@@ -70,7 +75,8 @@ export default class Home extends React.Component {
       <React.Fragment>
         <Input
           onChange={(e) => this.setState({ currentValue: e.target.value })}
-          onKeyPress={(e) => e.key === 'Enter' && addUser(this.state.currentValue)}
+          onKeyPress={(e) => e.key === 'Enter' && this.userUpdate(this.state.currentValue)}
+          value={this.state.currentValue}
           className='search-box'
         />
         {
