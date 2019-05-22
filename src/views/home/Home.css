@@ -46,8 +46,8 @@ ul li { display: inline-block; }
 }
 
 .ant-pagination-prev, .ant-pagination-next {
-  min-width: 25px;
-  height: 25px;
+  min-width: 32px;
+  height: 32px;
   background-color: lightgray;  
   border: 1px solid gray;
 }
@@ -56,10 +56,12 @@ ul li { display: inline-block; }
   outline: 0;
 }
 
+.ant-pagination-item {
+  margin: 0px 2px 0px 2px;
+}
+
 .ant-pagination-prev, .ant-pagination-next, .ant-pagination-jump-prev, .ant-pagination-jump-next {
   display: inline-block;
-  /* min-width: 32px;
-  height: 32px; */
   color: rgba(0,0,0,0.65);
   font-family: Arial;
   line-height: 32px;
