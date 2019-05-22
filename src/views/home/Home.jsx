@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import { Input, Button } from 'antd'
-import users from '../../components/users';
+import { Input } from 'antd'
 import './Home.css'
 
 export default class Home extends React.Component {
@@ -31,7 +30,7 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { success, addUser, convertDate, userInfo, latestUser } = this.props
+    const { success, convertDate, userInfo, latestUser } = this.props
     return (
       <React.Fragment>
         <Input
