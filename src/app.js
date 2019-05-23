@@ -7,13 +7,7 @@ import './app.css'
 
 const App = () => (
   <React.Fragment>
-    {/* <header>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
-    </header> */}
-      <PageHeader title="Git Users App" className='header-text' />
-
-
+    <PageHeader title="Git Users App" className='header-text' />
     <main>
       <Route exact path="/" component={HomeContainer} />
       <Route exact path="/about-us" component={About} />
