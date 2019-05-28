@@ -16,6 +16,8 @@ npm run start
 
 ## NOTES:
 ```bash
+Project requirements can be found in the 'ProjectRequirements.txt' document. 
+UX can be found in the 'UXDocument.png' file.
 Workflow:
         - app renders at 'http://localhost:3000'
         - Once app renders, user will be presented with a screen that has a searchbard, and a table list of results.
